@@ -1,4 +1,3 @@
-package DM1;
 import java.util.*;
 public class GUIDE {
 
@@ -10,21 +9,20 @@ public class GUIDE {
 		String nomHotel,adresseHotel,nbClients,infoHotel;
 		String ville;
 		int i,nbHotels;
-		boolean bool;
 
 		//ajouter une ville et ses hotels
 		System.out.println("Voulez-vous ajouter une ville (O/N)?");
 		choix=sc.nextLine().charAt(0);
-		
+
 		while(choix=='O') {
 			System.out.println("Quel est le nom de cette ville?");
 			ville=sc.nextLine();
 			System.out.println("Combien d'hotels possède cette ville?");
 			nbHotels=Integer.parseInt(sc.nextLine());
-			
+
 			tab=new String[nbHotels];
 			for(i=0;i<nbHotels;i++) {
-				
+
 				System.out.println("Quel est le nom de l'hotel ?");
 				nomHotel=sc.nextLine();
 				System.out.println("Entrez l'adresse de l'hotel : ");
@@ -34,25 +32,28 @@ public class GUIDE {
 				infoHotel=nomHotel+";"+adresseHotel+";"+nbClients;
 				tab[i]=infoHotel;
 			}
-				
+
 			d.nouvelleVille(ville, tab);
 
 			System.out.println("Voulez-vous ajouter une ville (O/N)?");
 			choix=sc.nextLine().charAt(0);		
 		}
 		d.affiche();
-		
+
 		//afficher la liste des hotels d'une ville
 		System.out.println("Voulez-vous afficher les hotels d'une ville (O/N)?");
 		choix=sc.nextLine().charAt(0);
 		while(choix=='O') {
 			System.out.println("Quel est le nom de cette ville?");
 			ville=sc.nextLine();
-		
-//pb java.lang.NullPointerExcpetion			d.afficherHotels(ville);
+			d.afficherHotels(ville);
+						
+			//pb java.lang.NullPointerExcpetion			d.afficherHotels(ville);
+			System.out.println("Voulez-vous afficher les hotels d'une ville (O/N)?");
+			choix=sc.nextLine().charAt(0);
 		}
 		//afficher le nb total de client de ts les hotels pendant le mois
-		System.out.println("nombre total des clients de tous les hotel: "+d.nbClientsTotal());
-	
+		int total=d.nbClientsTotal();
+		System.out.println("nombre total des clients de tous les hotel: "+total);
 	}
 }
