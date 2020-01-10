@@ -1,4 +1,3 @@
-package DM1;
 import java.util.*;
 public class VILLE {
 	Scanner sc=new Scanner(System.in);
@@ -18,6 +17,10 @@ public class VILLE {
 	//obtenir le nom d'un hotel
 	public String getNom() {
 		return nomHotel;
+	}
+	// obtenir le nom d'une ville
+	public String getVille() {
+		return nomVille;
 	}
 
 	//afficher les infos des hotels
