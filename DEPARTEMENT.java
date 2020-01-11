@@ -1,94 +1,60 @@
 import java.util.*;
+public class VILLE {
+	Scanner sc=new Scanner(System.in);
+	private String nomHotel;
+	String detailHotel,nomVille;
 
-public class DEPARTEMENT {
-	private HashMap<String,VILLE> listeVilles;
+	private Set<String> listeHotels;
 
-	public DEPARTEMENT() {//constructeur
-		listeVilles=new HashMap<String,VILLE>();
-	}
-	//ajouter une ville
-	public void nouvelleVille(String nomVille,String[] hotels) {
-		VILLE town= new VILLE(nomVille);
-		for(String n: hotels) {
-			town.ajoutHotel(n);
-		}
-		String key=nomVille.toLowerCase();
-		listeVilles.put(key, town);
-	}
-	//ajouter un hotel
-	public boolean ajoutHotel(String ville,String detailHotel) {
-		boolean nomExist=false;
-		String temp;
-		VILLE t=null;//je n'avais pas créé cet objet
-		String NOM="";//ni celui-là!!!
+	int l;
 
-		Set<String> keyListe=listeVilles.keySet();//pour contruire un itérateur on crée un ensemble de tt les clés
-		Iterator<String> iter= keyListe.iterator();// pas de new pour un iterator!!!!
-
-		while(iter.hasNext()) {//on fait défiler tt les clés (donc pr chaq K...
-			temp=iter.next();//on transfert iter.next() à un temp
-			t=listeVilles.get(temp);//on récupère l'objet Ville
-			NOM=t.getNom();//on récupère le nom de l'hotel
-			if (NOM.equals(ville)){//et on compare avec le nom recherché
-				t.ajoutHotel(detailHotel);
-				nomExist=true;
-			}
-		}
-		return nomExist;
-		/* renvoie 'false' si l'hotel n'existe pas */
-		/* renvoie 'true' si l'hotel a pu être ajouté */
+	//constructeur liste des hotels d'une ville
+	public VILLE(String ville) {
+		nomVille=ville;
+		listeHotels=new HashSet<String>();
 	}
 
-	//afficher l'ensemble des hotels d'une ville
-	public void afficherHotels(String nomVille) {
-		String temp;
-		VILLE t=null;
-		String NOM="";
+	//obtenir le nom d'un hotel
+	public String getNom() {
+		return nomHotel;
+	}
+	// obtenir le nom d'une ville
+	public String getVille() {
+		return nomVille;
+	}
 
-		Set<String> keyListe=listeVilles.keySet();//pour contruire un itérateur on crée un ensemble de tt les clés
-		Iterator<String> iter= keyListe.iterator();// pas de new pour un iterator!!!!
+	//afficher les infos des hotels
+	public void affiche() {
+		afficherHotels();
+	}
 
-		while(iter.hasNext()) {//on fait défiler tt les clés (donc pr chaq K...
-			temp=iter.next();//on transfert iter.next() à un temp
-			t=listeVilles.get(temp);//on récupère l'objet ville
-			NOM=t.getVille();//on récupère le nom de la ville
-				if (NOM.equals(nomVille.toLowerCase())){//et on compare avec le nom recherché
-					t.affiche();//on affiche alors lE OU LES hotel de la ville en question		
-				}
-			}
-		}
+	public void ajoutHotel(String detailHotel) {
+		listeHotels.add(detailHotel);
+	}
 
-	
-	//afficher l'ensemble des villes et des hotels
-	public void affiche(){/* 
-		on doit récupérer toutes villes du hashset et les afficher
-	 */
-		String temp;
-		VILLE t=null;//pourquoi on l'a mis à null les autres fois????
-
-		Set<String> keyListe=listeVilles.keySet();//pour contruire un itérateur on crée un ensemble de tt les clés
-		Iterator<String> iter= keyListe.iterator();// pas de new pour un iterator!!!!
-
-		while(iter.hasNext()) {//on fait défiler tt les clés (donc pr chaq K...
-			temp=iter.next();//on transfert iter.next() à un temp
-			t=listeVilles.get(temp);//on récupère la ville de chq clé
-			t.afficherHotels();//on affiche alors les hotels de chq ville			
+	//afficher les infos des hotels d'une ville
+	public void afficherHotels(){
+		Iterator<String> iter=listeHotels.iterator();
+		while(iter.hasNext()) {
+			String[] info;
+			String temp=iter.next();//tjs passer par une valeur temporaire pr afficher valeur de iter.next()
+			info=temp.split(";");
+			System.out.println("Nom de l'hotel : "+info[0]+" \n adresse :"+info[1]
+					+"\n fréquentation de l'hotel pour ce mois :"+info[2]+"\n");
 		}
 	}
-	//compter l'ensemble des clients de toutes les villes
-	public int nbClientsTotal() {
-		int sommeTotale=0;
-		String temp;
-		VILLE t;
-
-		Set<String> keyListe=listeVilles.keySet();//pour contruire un itérateur on crée un ensemble de tt les clés
-		Iterator<String> iter= keyListe.iterator();// pas de new pour un iterator!!!!
-
-		while(iter.hasNext()) {//on fait défiler tt les clés (donc pr chaq K...
-			temp=iter.next();//on transfert iter.next() à un temp
-			t=listeVilles.get(temp);//on récupère la ville de chq clé
-			sommeTotale=sommeTotale+t.nbClientsDansUneVille();
+	//compter le nb de clients
+	public int nbClientsDansUneVille() {
+		int somme=0;
+		Iterator<String> iter=listeHotels.iterator();
+		while(iter.hasNext()) {
+			String[] info;
+			String temp=iter.next();//tjs passer par une valeur temporaire pr afficher valeur de iter.next()
+			info=temp.split(";");
+			somme=somme+Integer.parseInt(info[2]);
+			
 		}
-		return sommeTotale;
+		return somme;
 	}
-}	
+
+}
