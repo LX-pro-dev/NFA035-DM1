@@ -48,12 +48,11 @@ public class GUIDE {
 			ville=sc.nextLine();
 			d.afficherHotels(ville);
 						
-			//pb java.lang.NullPointerExcpetion			d.afficherHotels(ville);
 			System.out.println("Voulez-vous afficher les hotels d'une ville (O/N)?");
 			choix=sc.nextLine().charAt(0);
 		}
 		//afficher le nb total de client de ts les hotels pendant le mois
 		int total=d.nbClientsTotal();
-		System.out.println("nombre total des clients de tous les hotel: "+total);
+		System.out.println("Nombre total des clients de tous les hotels : "+total);
 	}
 }
