@@ -28,9 +28,9 @@ public class DEPARTEMENT {
 		while(iter.hasNext()) {//on fait défiler tt les clés (donc pr chaq K...
 			temp=iter.next();//on transfert iter.next() à un temp
 			t=listeVilles.get(temp);//on récupère l'objet ville
-			NOM=t.getVille();//on récupère le nom de la ville
+			NOM=t.getVille().toLowerCase();//on récupère le nom de la ville que l'on met en minuscule
 			if(NOM!=null){
-				if (NOM.equals(nomVille.toLowerCase())){//et on compare avec le nom recherché
+				if (NOM.equals(nomVille.toLowerCase())){//et on compare avec le nom recherché mis en minuscule
 					t.affiche();//on affiche alors lE OU LES hotels de la ville en question		
 				}
 			}
